@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:workshop/core/networking/dio_helper.dart';
 import 'package:workshop/core/routing/app_routes.dart';
 import 'package:workshop/core/routing/routes.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  DioHelper.init();
   runApp(const MyApp());
 }
 

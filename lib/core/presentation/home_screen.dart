@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:workshop/core/constants/app_color.dart';
+import 'package:workshop/core/routing/routes.dart';
 import 'package:workshop/core/widgets/custum_button.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -13,13 +14,16 @@ class HomeScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           CustumButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, AppRoutes.goldScreen);
+            },
             text: 'Gold',
             color: AppColors.goldColor,
           ),
           SizedBox(height: 15),
           CustumButton(
-            onPressed: () {},
+            onPressed: () {
+            },
             text: 'Silver',
             color: AppColors.silverColor,
           ),
