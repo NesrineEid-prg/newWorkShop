@@ -14,10 +14,10 @@ class GoldScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) {
-        return GoldCubit(GoldRepo()..getGold());
+        return GoldCubit(GoldRepo())..getGold();
       },
       child: Scaffold(
-        // backgroundColor: Colors.black,
+        backgroundColor: Colors.black,
         appBar: AppBar(
           backgroundColor: Colors.black,
           title: Text(
@@ -31,13 +31,12 @@ class GoldScreen extends StatelessWidget {
         ),
         body: BlocBuilder<GoldCubit, GoldState>(
           builder: (context, state) {
+            print(state.runtimeType);
             if (state is GoldLOdingState) {
               return Center(child: CircularProgressIndicator());
-            } 
-            else if (state is GoldErrorState) {
+            } else if (state is GoldErrorState) {
               return Center(child: Text('something wrong'));
-            } 
-            else if (state is GoldSucessState) {
+            } else if (state is GoldSucessState) {
               return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -48,7 +47,7 @@ class GoldScreen extends StatelessWidget {
                       CustumText(
                         20,
                         FontWeight.bold,
-                        txt: state.sucessMsg.price.toString(),
+                        txt: state.sucessMsg.price?.toString() ?? "0",
                         txtCol: AppColors.goldColor,
                       ),
                       SizedBox(width: 5),
@@ -62,10 +61,9 @@ class GoldScreen extends StatelessWidget {
                   ),
                 ],
               );
-              
-              }return SizedBox();
-            } 
-          
+            }
+            return SizedBox();
+          },
         ),
       ),
     );

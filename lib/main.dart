@@ -5,7 +5,7 @@ import 'package:workshop/core/routing/routes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  DioHelper.init();
+ await DioHelper.init();
   runApp(const MyApp());
 }
 

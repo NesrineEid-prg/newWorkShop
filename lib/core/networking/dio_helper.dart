@@ -3,7 +3,7 @@ import 'package:workshop/core/networking/api_constant.dart';
 
 class DioHelper {
   static late Dio dio;
-  static void init() {
+  static  init() {
     dio = Dio(
       BaseOptions(
         baseUrl: ApiConstant.baseUrl,

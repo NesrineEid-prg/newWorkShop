@@ -5,16 +5,30 @@ import 'package:workshop/features/gold/presentation/cubit/gold_state.dart';
 class GoldCubit extends Cubit<GoldState> {
   GoldCubit(this.goldRepo) : super(GoldInitilState());
   final GoldRepo goldRepo;
+  // Future<void> getGold() async {
+  //   emit(GoldLOdingState());
+  //   final res = await goldRepo.getGold();
+  //   res.fold(
+  //     (error) {
+  //       emit(GoldErrorState(errorMsg: error));
+  //     },
+  //     (goldmodel) {
+  //       emit(GoldSucessState(sucessMsg: goldmodel));
+  //     },
+  //   );
+  // }
+
   Future<void> getGold() async {
     emit(GoldLOdingState());
-    final res = await goldRepo.getGold();
-    res.fold(
-      (error) {
-        emit(GoldErrorState(errorMsg: error));
-      },
-      (goldmodel) {
-        emit(GoldSucessState(sucessMsg: goldmodel));
-      },
-    );
+    try {
+      await Future.delayed(Duration(seconds: 1)); // تنتظر قبل request
+      final res = await goldRepo.getGold();
+      res.fold(
+        (error) => emit(GoldErrorState(errorMsg: error)),
+        (goldmodel) => emit(GoldSucessState(sucessMsg: goldmodel)),
+      );
+    } catch (e) {
+      emit(GoldErrorState(errorMsg: e.toString()));
+    }
   }
 }
